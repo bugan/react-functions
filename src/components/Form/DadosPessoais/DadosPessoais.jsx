@@ -9,7 +9,7 @@ import MomentUtils from "@date-io/moment";
 import moment from "moment";
 import "moment/locale/pt-br";
 
-function DadosPessoais({ onProximo }) {
+function DadosPessoais({ onProximo, onAnterior }) {
   moment.locale("pt-br");
 
   return (
@@ -46,8 +46,18 @@ function DadosPessoais({ onProximo }) {
         size="large"
         margin="normal"
       >
-        <Button color="secondary">Voltar</Button>
-        <Button color="primary" onClick={onProximo}>
+        <Button
+          color="secondary"
+          onClick={onAnterior}
+          disabled={onAnterior == null}
+        >
+          Voltar
+        </Button>
+        <Button
+          color="primary"
+          onClick={onProximo}
+          disabled={onProximo == null}
+        >
           Próximo
         </Button>
       </ButtonGroup>

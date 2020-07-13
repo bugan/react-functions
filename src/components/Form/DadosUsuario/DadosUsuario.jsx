@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
-function DadosUsuario({ onProximo }) {
+function DadosUsuario({ onProximo, onAnterior }) {
   return (
     <form>
       <TextField
@@ -34,8 +34,18 @@ function DadosUsuario({ onProximo }) {
         size="large"
         margin="normal"
       >
-        <Button color="secondary">Voltar</Button>
-        <Button color="primary" onClick={onProximo}>
+        <Button
+          color="secondary"
+          onClick={onAnterior}
+          disabled={onAnterior == null}
+        >
+          Voltar
+        </Button>
+        <Button
+          color="primary"
+          onClick={onProximo}
+          disabled={onProximo == null}
+        >
           Próximo
         </Button>
       </ButtonGroup>

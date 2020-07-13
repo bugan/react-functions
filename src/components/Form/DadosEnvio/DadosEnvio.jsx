@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
-function DadosEnvio({ onProximo }) {
+function DadosEnvio({ onProximo, onAnterior }) {
   return (
     <form>
       <TextField id="cep" label="CEP" />
@@ -17,8 +17,18 @@ function DadosEnvio({ onProximo }) {
         size="medium"
         margin="normal"
       >
-        <Button color="secondary">Voltar</Button>
-        <Button color="primary" onClick={onProximo}>
+        <Button
+          color="secondary"
+          onClick={onAnterior}
+          disabled={onAnterior == null}
+        >
+          Voltar
+        </Button>
+        <Button
+          color="primary"
+          onClick={onProximo}
+          disabled={onProximo == null}
+        >
           Próximo
         </Button>
       </ButtonGroup>
