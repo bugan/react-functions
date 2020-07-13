@@ -4,40 +4,78 @@ import Switch from "@material-ui/core/Switch";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
-import moment from "moment";
-import "moment/locale/pt-br";
 
 function DadosPessoais({ onProximo, onAnterior }) {
-  moment.locale("pt-br");
+  const dados = {
+    promocoes: true,
+    novidades: true,
+  };
+  function escutadorInput(event) {
+    const { name, value } = event.target;
+    dados[name] = value;
+  }
+  function escutadorToogle(event) {
+    const { name, checked } = event.target;
+    dados[name] = checked;
+  }
 
   return (
     <form>
-      <TextField id="nome" label="Nome" margin="normal" />
-      <TextField id="sobrenome" label="sobrenomes" margin="normal" />
+      <TextField
+        id="nome"
+        label="Nome"
+        margin="normal"
+        name="nome"
+        onChange={escutadorInput}
+      />
+      <TextField
+        id="sobrenome"
+        label="sobrenomes"
+        margin="normal"
+        name="sobrenome"
+        onChange={escutadorInput}
+      />
       <br />
-      <TextField id="cpf" label="CPF" margin="normal" />
+      <TextField
+        id="cpf"
+        label="CPF"
+        margin="normal"
+        name="cpf"
+        onChange={escutadorInput}
+      />
       <br />
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <DatePicker
-          label="Aniversário"
-          margin="normal"
-          value={new Date()}
-          onChange={() => {}}
-        ></DatePicker>
-      </MuiPickersUtilsProvider>
+
+      <TextField
+        label="Aniversário"
+        margin="normal"
+        type="date"
+        defaultValue="1993-01-04"
+        name="aniversario"
+        onChange={escutadorInput}
+      />
+
       <br />
       <FormControlLabel
         label="Receber Novidades?"
         control={
-          <Switch id="novidades" defaultChecked={true} color="primary" />
+          <Switch
+            id="novidades"
+            defaultChecked={true}
+            color="primary"
+            name="novidades"
+            onChange={escutadorToogle}
+          />
         }
       />
       <FormControlLabel
         label="Receber Promoções"
         control={
-          <Switch value="promocoes" defaultChecked={true} color="primary" />
+          <Switch
+            defaultChecked={true}
+            color="primary"
+            name="promocoes"
+            onChange={escutadorToogle}
+          />
         }
       />
       <ButtonGroup
@@ -55,7 +93,7 @@ function DadosPessoais({ onProximo, onAnterior }) {
         </Button>
         <Button
           color="primary"
-          onClick={onProximo}
+          onClick={() => onProximo(dados)}
           disabled={onProximo == null}
         >
           Próximo

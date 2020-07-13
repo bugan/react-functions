@@ -4,22 +4,25 @@ import DadosUsuario from "./DadosUsuario/DadosUsuario";
 import DadosEnvio from "./DadosEnvio/DadosEnvio";
 
 function FormularioCadastro() {
-  const lista = [
+  const formularios = [
     <DadosUsuario onProximo={proximo} />,
     <DadosPessoais onProximo={proximo} onAnterior={voltar} />,
-    <DadosEnvio onAnterior={voltar} />,
+    <DadosEnvio onAnterior={voltar} onProximo={proximo} />,
   ];
   let index = 0;
-  const [atual, setAtual] = useState(lista[index]);
+  const [atual, setAtual] = useState(formularios[index]);
+  const informacoesColetadas = [];
 
-  function proximo() {
+  function proximo(informacoes) {
+    console.log(informacoes);
+    informacoesColetadas[index] = informacoes;
     index++;
-    setAtual(lista[index]);
+    setAtual(formularios[index]);
   }
 
   function voltar() {
     index--;
-    setAtual(lista[index]);
+    setAtual(formularios[index]);
   }
   return <>{atual}</>;
 }
